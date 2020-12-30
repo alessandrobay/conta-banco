@@ -1,0 +1,120 @@
+package aplicacao;
+
+import java.util.Locale;
+import java.util.Scanner;
+
+import entidade.Conta;
+
+public class Programa {
+	public static void main(String[] args) {
+
+		
+		Locale.setDefault(Locale.US);
+		Scanner sc = new Scanner(System.in);
+		Conta contas;
+
+		System.out.println(" digite o número da conta");
+		int conta = sc.nextInt();
+		sc.nextLine();
+
+		System.out.println("digite o nome do titular da conta");
+		String nome = sc.nextLine();
+
+		System.out.println("existe um depósito inicial, responta sim ou não com (s / n");
+		char resposta = sc.next().charAt(0);
+		if (resposta == 's') {
+			System.out.println(" digite o valor do depósito.");
+			double depositoinicial = sc.nextDouble();
+			contas = new Conta(nome, conta, depositoinicial);
+
+		} else {
+
+			contas = new Conta(nome, conta);
+		}
+
+		
+		System.out.println(" digite o novo valor a ser depositado");
+		double depositoinicial = sc.nextDouble();
+
+		System.out.println(" dadoa atualizados da conta");
+		System.out.println(conta);
+
+		System.out.println(" insira o deposito na conta");
+		double deposito = sc.nextDouble();
+		contas.deposito(conta);
+
+		System.out.println(" dados atualizados");
+		System.out.println(conta);
+
+		System.out.println("retiraca da conta");
+		double saque = sc.nextDouble();
+		contas.saque(conta);
+
+		System.out.println("dados atualizados");
+		System.out.println(contas);
+		
+		
+		
+	}
+
+}
+
+-----------------------------------------------------------------------
+
+
+package entidade;
+
+public class Conta {
+	private String nome;
+	private int conta;
+	private double saldo;
+
+	public Conta() {
+	}
+
+	public Conta(String nome, int conta, double saldoinicial) {
+
+		this.nome = nome;
+		this.conta = conta;
+		deposito(saldoinicial);
+	}
+
+	public Conta(String nome, int conta) {
+
+		this.nome = nome;
+		this.conta = conta;
+
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public int getConta() {
+		return conta;
+	}
+
+	public void setConta(int conta) {
+		this.conta = conta;
+	}
+
+	public double getSaldo() {
+		return saldo;
+	}
+	public void deposito (double conta) {
+		saldo += conta;
+	}
+
+	public void saque (double conta) {
+		saldo -= conta + 5.0;
+	}
+	public String toString() {
+		return "nome=" + nome + ", conta=" + conta + ", saldo=" + saldo;
+		
+	}
+
+}
